@@ -4,7 +4,7 @@ const canvas = document.getElementById("2dcanvas")
 const ctx = canvas.getContext("2d");
 const planetSize = 1000;
 
-let whiteNoise = generateWhiteNoise(720, 5);
+let whiteNoise = generateWhiteNoise(720);
 render();
 
 
