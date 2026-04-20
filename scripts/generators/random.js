@@ -31,3 +31,14 @@ function generateWhiteNoise(size) {
     }
     return noise;
 }
+
+function generateWhiteNoiseRng(size, rng) {
+    let noise = new Array(size);
+    for (let i = 0; i < noise.length; i++) {
+        noise[i] = new Array(size);
+        for (let j = 0; j < noise[i].length; j++) {
+            noise[i][j] = rng();
+        }
+    }
+    return noise;
+}
