@@ -9,6 +9,8 @@ function init() {
     }
     canvas = document.getElementById("2dcanvas")
     ctx = canvas.getContext("2d");
+
+    map = generateMap(1);
 }
 
 let whiteNoise = generateWhiteNoise(1000, 1);

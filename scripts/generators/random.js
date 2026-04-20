@@ -1,4 +1,4 @@
-console.log("loaded generator.js");
+console.log("loaded generators/random.js");
 
 function seededRandom(seed) {
     let state = seed;
