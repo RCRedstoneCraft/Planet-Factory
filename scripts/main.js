@@ -1,28 +1,15 @@
 console.log("loaded main.js");
+init()
 
-const canvas = document.getElementById("2dcanvas")
-const ctx = canvas.getContext("2d");
-const planetSize = 1000;
+function init() {
+    camera = {
+        zoom: 50,   // pixel per tile
+        x: 0,
+        y: 0
+    }
+    canvas = document.getElementById("2dcanvas")
+    ctx = canvas.getContext("2d");
+}
 
 let whiteNoise = generateWhiteNoise(720);
-render();
-
-
-function render() {
-    for (let i = 0; i < whiteNoise.length; i++) {
-        for (let j = 0; j < whiteNoise[i].length; j++) {
-            if (whiteNoise[i][j] <= 0.5) {
-                ctx.fillStyle = "#000";
-            } else {
-                ctx.fillStyle = "#fff";
-            }
-
-            ctx.fillRect(
-                i,
-                j,
-                1,
-                1
-            )
-        }
-    }
-}
+render(whiteNoise);
