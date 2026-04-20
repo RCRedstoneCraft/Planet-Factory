@@ -11,5 +11,5 @@ function init() {
     ctx = canvas.getContext("2d");
 }
 
-let whiteNoise = generateWhiteNoise(720);
+let whiteNoise = generateWhiteNoise(1000, 1);
 render(whiteNoise);
