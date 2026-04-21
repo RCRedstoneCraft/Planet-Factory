@@ -6,7 +6,7 @@ function init() {
     camera = {
         starId: 0,
         planetId: 1,
-        zoom: 50,   // pixel per tile
+        zoom: 10,   // pixel per tile
         x: 0,
         y: 0
     }

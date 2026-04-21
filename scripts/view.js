@@ -27,19 +27,20 @@ function renderPlanet() {
     let planet = map.starSystems[camera.starId].planets[camera.planetId];
     
 
-    console.log(map)
+    console.log(map);
     console.log(planet);
     console.log(planet.heightMap);
     console.log(camera);
 
-    //let groundMap = planet.heightMap
+    let groundMap = planet.heightMap;
 
     for (let i = 0; i < groundMap.length; i++) {
         for (let j = 0; j < groundMap[i].length; j++) {
             // get pixel color
-            let index = Math.round(groundMap[i][j] * 100);
+            let index = Math.floor(groundMap[i][j] * 100);
 
-            ctx.fillStyle = heightMap[index];
+            console.log(heightColorMapPlanet1[index]);
+            ctx.fillStyle = heightColorMapPlanet1[index];
             ctx.fillRect(
                 i * camera.zoom + camera.x * camera.zoom,
                 j * camera.zoom + camera.y * camera.zoom,

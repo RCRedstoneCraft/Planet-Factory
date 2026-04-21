@@ -3,7 +3,7 @@ console.log("loaded generators/terrain.js");
 const starCount = 64;
 const planetCount = 3;
 const mapSize = 100;        // ly (light years)
-const planetSize = 1000;    // gs (grid Spaces)
+const planetSize = 100;    // gs (grid Spaces)
 const starTypes = 1
 
 // in au (Astronomical units)

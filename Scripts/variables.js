@@ -1,7 +1,7 @@
 let map = null;
 let camera = null;
 
-let heightMap = [
+let heightColorMapPlanet1 = [
     "#000",
     "#000",
     "#000",
