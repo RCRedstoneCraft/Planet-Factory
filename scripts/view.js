@@ -37,8 +37,8 @@ function renderPlanet() {
     console.log(camera);
 
 
-    for (let i = -camera.x; i < planet.heightMap.length + camera.x; i++) {
-        for (let j = -camera.y; j < get(planet.heightMap, i).length + camera.y; j++) {
+    for (let i = -planet.heightMap.length; i < planet.heightMap.length*2; i++) {
+        for (let j = -get(planet.heightMap, i).length; j < get(planet.heightMap, i).length*2; j++) {
             // get pixel color
             let index = Math.floor(get(get(planet.heightMap, i), j) * 100);
 

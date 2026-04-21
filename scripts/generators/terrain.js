@@ -3,7 +3,7 @@ console.log("loaded generators/terrain.js");
 const starCount = 2;
 const planetCount = 3;
 const mapSize = 100;        // ly (light years)
-const planetSize = 500;    // gs (grid Spaces)
+const planetSize = 1000;    // gs (grid Spaces)
 const starTypes = 1
 
 // in au (Astronomical units)
@@ -55,20 +55,20 @@ function generatePlanet(rng, planetId) {
     console.log("\t\tGenerating Planet (ID: " + planetId + ")");
 
     let planet = {
-        heightMap: heightMap = generateValueNoise(planetSize, rng, 8, 0.2),//generateWhiteNoiseRng(planetSize, rng),                                                                   // TODO
+        heightMap: heightMap = generateWhiteNoiseRng(planetSize, rng),//generateWhiteNoiseRng(planetSize, rng),                                                                   // TODO
         oreMap: null,                                                                                                             // TODO
         starDistance: 0,
         windPower: rng() * 2,  // Max 200%
         solarPower: 0,
     }
         
-    if (planetId === 1) {
+    if (planetId === 0) {
         planet.starDistance = rng() * (planetDistances1.max - planetDistances1.min) + planetDistances1.min
     }
-    if (planetId === 2) {
+    if (planetId === 1) {
         planet.starDistance = rng() * (planetDistances2.max - planetDistances2.min) + planetDistances2.min
     }
-    if (planetId === 3) {
+    if (planetId === 2) {
         planet.starDistance = rng() * (planetDistances3.max - planetDistances3.min) + planetDistances3.min
     }
     planet.solarPower = (1 / planet.starDistance) + (rng() * 0.5 - 0.25);
