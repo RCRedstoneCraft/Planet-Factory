@@ -27,19 +27,22 @@ function renderPlanet() {
     let planet = map.starSystems[camera.starId].planets[camera.planetId];
     
 
+    console.log("map");
     console.log(map);
+    console.log("planet");
     console.log(planet);
+    console.log("planet.heightMap");
     console.log(planet.heightMap);
+    console.log("camera");
     console.log(camera);
 
-    let groundMap = planet.heightMap;
 
-    for (let i = 0; i < groundMap.length; i++) {
-        for (let j = 0; j < groundMap[i].length; j++) {
+    for (let i = -camera.x; i < planet.heightMap.length + camera.x; i++) {
+        for (let j = -camera.y; j < get(planet.heightMap, i).length + camera.y; j++) {
             // get pixel color
-            let index = Math.floor(groundMap[i][j] * 100);
+            let index = Math.floor(get(get(planet.heightMap, i), j) * 100);
 
-            console.log(heightColorMapPlanet1[index]);
+            //console.log(heightColorMapPlanet1[index]);
             ctx.fillStyle = heightColorMapPlanet1[index];
             ctx.fillRect(
                 i * camera.zoom + camera.x * camera.zoom,
@@ -49,14 +52,4 @@ function renderPlanet() {
             )
         }
     }
-}
-
-function get(arr, index) {
-    if (index < 0) {
-        index += arr.length;
-    }
-    if (index >= arr.length) {
-        index -= arr.length;
-    }
-    return arr[index];
 }

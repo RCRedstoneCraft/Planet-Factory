@@ -309,3 +309,23 @@ let heightColorMapPlanet2 = [
     "#fff",
     "#fff",
 ]
+
+function set(arr, index, value) {
+    if (index < 0) {
+        index += arr.length;
+    }
+    if (index >= arr.length) {
+        index -= arr.length;
+    }
+    arr[index] = value;
+}
+
+function get(arr, index) {
+    if (index < 0) {
+        index += arr.length;
+    }
+    if (index >= arr.length) {
+        index -= arr.length;
+    }
+    return arr[index];
+}
