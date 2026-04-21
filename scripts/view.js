@@ -1,7 +1,5 @@
 console.log("loaded view.js")
 
-let camera = null;
-
 let canvas = null;
 let ctx = null;
 
@@ -22,4 +20,42 @@ function render(whiteNoise) {
             )
         }
     }
+}
+
+function renderPlanet() {
+    console.log("rendering Planet");
+    let planet = map.starSystems[camera.starId].planets[camera.planetId];
+    
+
+    console.log(map)
+    console.log(planet);
+    console.log(planet.heightMap);
+    console.log(camera);
+
+    //let groundMap = planet.heightMap
+
+    for (let i = 0; i < groundMap.length; i++) {
+        for (let j = 0; j < groundMap[i].length; j++) {
+            // get pixel color
+            let index = Math.round(groundMap[i][j] * 100);
+
+            ctx.fillStyle = heightMap[index];
+            ctx.fillRect(
+                i * camera.zoom + camera.x * camera.zoom,
+                j * camera.zoom + camera.y * camera.zoom,
+                camera.zoom,
+                camera.zoom
+            )
+        }
+    }
+}
+
+function get(arr, index) {
+    if (index < 0) {
+        index += arr.length;
+    }
+    if (index >= arr.length) {
+        index -= arr.length;
+    }
+    return arr[index];
 }

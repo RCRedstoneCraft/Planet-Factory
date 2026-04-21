@@ -72,4 +72,5 @@ function generatePlanet(rng, planetId) {
         planet.starDistance = rng() * (planetDistances3.max - planetDistances3.min) + planetDistances3.min
     }
     planet.solarPower = (1 / planet.starDistance) + (rng() * 0.5 - 0.25);
+    return planet;
 }
