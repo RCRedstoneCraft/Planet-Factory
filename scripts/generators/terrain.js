@@ -55,7 +55,7 @@ function generatePlanet(rng, planetId) {
     console.log("\t\tGenerating Planet (ID: " + planetId + ")");
 
     let planet = {
-        heightMap: heightMap = generateWhiteNoiseRng(planetSize, rng),//generateWhiteNoiseRng(planetSize, rng),                                                                   // TODO
+        heightMap: heightMap = generatePerlin2D(planetSize, rng),//generateWhiteNoiseRng(planetSize, rng),                                                                   // TODO
         oreMap: null,                                                                                                             // TODO
         starDistance: 0,
         windPower: rng() * 2,  // Max 200%

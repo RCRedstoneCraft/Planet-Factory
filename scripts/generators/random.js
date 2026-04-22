@@ -42,3 +42,80 @@ function generateWhiteNoiseRng(size, rng) {
     }
     return noise;
 }
+
+function generatePerlin2D(size, rng) {
+    const perm = new Uint16Array(512);
+    const gradX = new Float32Array(512);
+    const gradY = new Float32Array(512);
+
+    // Initialize permutation + gradients
+    const p = new Uint16Array(256);
+    for (let i = 0; i < 256; i++) p[i] = i;
+
+    // Fisher-Yates shuffle using rng
+    for (let i = 255; i > 0; i--) {
+        const j = (rng() * (i + 1)) | 0;
+        [p[i], p[j]] = [p[j], p[i]];
+    }
+
+    for (let i = 0; i < 512; i++) {
+        const v = p[i & 255];
+        perm[i] = v;
+
+        // Precompute random unit gradients
+        const angle = rng() * Math.PI * 2;
+        gradX[i] = Math.cos(angle);
+        gradY[i] = Math.sin(angle);
+    }
+
+    function fade(t) {
+        return t * t * t * (t * (t * 6 - 15) + 10);
+    }
+
+    function lerp(a, b, t) {
+        return a + t * (b - a);
+    }
+
+    function dot(ix, iy, x, y) {
+        const gIndex = perm[(ix + perm[iy & 255]) & 255];
+        return gradX[gIndex] * x + gradY[gIndex] * y;
+    }
+
+    const result = new Array(size);
+    for (let x = 0; x < size; x++) {
+        result[x] = new Float32Array(size);
+    }
+
+    const scale = 20 / size; // adjust frequency here if needed
+
+    for (let x = 0; x < size; x++) {
+        for (let y = 0; y < size; y++) {
+            const fx = x * scale;
+            const fy = y * scale;
+
+            const x0 = fx | 0;
+            const y0 = fy | 0;
+            const x1 = x0 + 1;
+            const y1 = y0 + 1;
+
+            const sx = fade(fx - x0);
+            const sy = fade(fy - y0);
+
+            const n00 = dot(x0, y0, fx - x0, fy - y0);
+            const n10 = dot(x1, y0, fx - x1, fy - y0);
+            const n01 = dot(x0, y1, fx - x0, fy - y1);
+            const n11 = dot(x1, y1, fx - x1, fy - y1);
+
+            const ix0 = lerp(n00, n10, sx);
+            const ix1 = lerp(n01, n11, sx);
+            let value = lerp(ix0, ix1, sy);
+
+            // Normalize from [-~1, ~1] → [0,1]
+            value = value * 0.5 + 0.5;
+
+            result[x][y] = value;
+        }
+    }
+
+    return result;
+}
