@@ -43,26 +43,25 @@ function generateWhiteNoiseRng(size, rng) {
     return noise;
 }
 
-function generatePerlin2D(size, rng) {
+function generatePerlin2D(size, rng, median = 0.5, scaleModifyer = 20) {
     const perm = new Uint16Array(512);
     const gradX = new Float32Array(512);
     const gradY = new Float32Array(512);
 
-    // Initialize permutation + gradients
     const p = new Uint16Array(256);
     for (let i = 0; i < 256; i++) p[i] = i;
 
-    // Fisher-Yates shuffle using rng
     for (let i = 255; i > 0; i--) {
         const j = (rng() * (i + 1)) | 0;
-        [p[i], p[j]] = [p[j], p[i]];
+        const tmp = p[i];
+        p[i] = p[j];
+        p[j] = tmp;
     }
 
     for (let i = 0; i < 512; i++) {
         const v = p[i & 255];
         perm[i] = v;
 
-        // Precompute random unit gradients
         const angle = rng() * Math.PI * 2;
         gradX[i] = Math.cos(angle);
         gradY[i] = Math.sin(angle);
@@ -81,12 +80,23 @@ function generatePerlin2D(size, rng) {
         return gradX[gIndex] * x + gradY[gIndex] * y;
     }
 
+    // Median remap (fast, branchless-ish shaping)
+    function applyMedian(v) {
+        if (median === 0.5) return v;
+
+        if (v < 0.5) {
+            return (v / 0.5) * median;
+        } else {
+            return median + ((v - 0.5) / 0.5) * (1 - median);
+        }
+    }
+
     const result = new Array(size);
     for (let x = 0; x < size; x++) {
         result[x] = new Float32Array(size);
     }
 
-    const scale = 20 / size; // adjust frequency here if needed
+    const scale = scaleModifyer / size;
 
     for (let x = 0; x < size; x++) {
         for (let y = 0; y < size; y++) {
@@ -110,8 +120,11 @@ function generatePerlin2D(size, rng) {
             const ix1 = lerp(n01, n11, sx);
             let value = lerp(ix0, ix1, sy);
 
-            // Normalize from [-~1, ~1] → [0,1]
+            // Normalize to [0,1]
             value = value * 0.5 + 0.5;
+
+            // Apply median shift
+            value = applyMedian(value);
 
             result[x][y] = value;
         }
