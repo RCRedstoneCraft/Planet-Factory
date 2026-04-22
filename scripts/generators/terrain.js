@@ -55,7 +55,8 @@ function generatePlanet(rng, planetId) {
     console.log("\t\tGenerating Planet (ID: " + planetId + ")");
 
     let planet = {
-        heightMap: heightMap = generatePerlin2D(planetSize, rng, 0.5, 10),//generateWhiteNoiseRng(planetSize, rng),                                                                   // TODO
+        heightMap: heightMap = generatePerlin2D(planetSize, rng, 0.6, 10),//generateWhiteNoiseRng(planetSize, rng),                                                                   // TODO
+        heightColorMap: null,
         oreMap: null,                                                                                                             // TODO
         starDistance: 0,
         windPower: rng() * 2,  // Max 200%
@@ -63,13 +64,16 @@ function generatePlanet(rng, planetId) {
     }
         
     if (planetId === 0) {
-        planet.starDistance = rng() * (planetDistances1.max - planetDistances1.min) + planetDistances1.min
+        planet.starDistance = rng() * (planetDistances1.max - planetDistances1.min) + planetDistances1.min;
+        planet.heightColorMap = heightColorMapPlanet0;
     }
     if (planetId === 1) {
-        planet.starDistance = rng() * (planetDistances2.max - planetDistances2.min) + planetDistances2.min
+        planet.starDistance = rng() * (planetDistances2.max - planetDistances2.min) + planetDistances2.min;
+        planet.heightColorMap = heightColorMapPlanet1;
     }
     if (planetId === 2) {
-        planet.starDistance = rng() * (planetDistances3.max - planetDistances3.min) + planetDistances3.min
+        planet.starDistance = rng() * (planetDistances3.max - planetDistances3.min) + planetDistances3.min;
+        planet.heightColorMap = heightColorMapPlanet2;
     }
     planet.solarPower = (1 / planet.starDistance) + (rng() * 0.5 - 0.25);
     return planet;

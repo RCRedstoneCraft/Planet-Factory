@@ -9,7 +9,7 @@ init()
 function init() {
     camera = {
         starId: 0,
-        planetId: 1,
+        planetId: 0,
         zoom: 2,   // pixel per tile
         x: 0,
         y: 0

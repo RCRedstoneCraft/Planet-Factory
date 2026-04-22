@@ -43,7 +43,7 @@ function renderPlanet() {
             let index = Math.floor(get(get(planet.heightMap, i), j) * 100);
 
             //console.log(heightColorMapPlanet1[index]);
-            ctx.fillStyle = heightColorMapPlanet1[index];
+            ctx.fillStyle = planet.heightColorMap[index];
             ctx.fillRect(
                 i * camera.zoom + camera.x * camera.zoom,
                 j * camera.zoom + camera.y * camera.zoom,
