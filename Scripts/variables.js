@@ -1,6 +1,9 @@
 let map = null;
 let camera = null;
 
+let canvas = document.getElementById("2dcanvas")
+let ctx = canvas.getContext("2d");
+
 let heightColorMapPlanet0 = [   // lava planet
     "#ff8000",
     "#ff8000",
