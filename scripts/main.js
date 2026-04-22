@@ -10,8 +10,8 @@ function init() {
     camera = {
         starId: 0,
         planetId: 1,
-        zoom: 10,   // pixel per tile
-        x: 60,
+        zoom: 1,   // pixel per tile
+        x: 0,
         y: 0
     }
     canvas = document.getElementById("2dcanvas")
