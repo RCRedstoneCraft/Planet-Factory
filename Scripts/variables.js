@@ -330,3 +330,7 @@ function get(arr, index) {
     }
     return arr[index];
 }
+
+function doFullscreen(){
+    canvas.requestFullscreen();
+}
