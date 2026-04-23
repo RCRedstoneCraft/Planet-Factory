@@ -108,7 +108,7 @@ let heightColorMapPlanet0 = [   // lava planet
 ]
 
 let heightColorMapPlanet1 = [   // standart planet
-    "#0000a0",
+    "#0000a1",
     "#0000a0",
     "#0000a0",
     "#0000a0",
