@@ -207,6 +207,7 @@ let heightColorMapPlanet1 = [   // standart planet
     "#ffffff",
     "#ffffff",
     "#ffffff",
+    "#ffffff",
 ]
 
 let heightColorMapPlanet2 = [   // ice planet
@@ -301,6 +302,7 @@ let heightColorMapPlanet2 = [   // ice planet
     "#ffaeee",
     "#ffaeee",
     "#ffaeee",
+    "#ffafff",
     "#ffafff",
     "#ffafff",
     "#ffafff",
