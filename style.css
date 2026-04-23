@@ -4,7 +4,7 @@
 /* CSS */
 .button-48 {
   appearance: none;
-  background-color: #FFFFFF;
+  background-color: white;
   border-width: 3;
   border-style: groove;
   border-radius: 12px;
@@ -37,7 +37,7 @@
 .button-48:before {
   animation: opacityFallbackOut .5s step-end forwards;
   backface-visibility: hidden;
-  background-color: #EBEBEB;
+  background-color: dimgrey;
   clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
   content: "";
   height: 100%;
