@@ -72,7 +72,7 @@ function generatePlanet(rng, planetId) {
         planet.starDistance = rng() * (planetDistances2.max - planetDistances2.min) + planetDistances2.min;
         planet.heightColorMap = heightColorMapPlanet1;
         planet.heightMap = generatePerlin2D(planetSize, rng, 0.7, 10)
-        planet.oreMaps.push(generateOreMap(rng, "Iron", 0.5, 10, 0.7, 5000))
+        planet.oreMaps.push(generateOreMap(rng, "Iron", 0.5, 10, 0.7, 5000, 0.5, planet.heightMap))
     }
     if (planetId === 2) {
         planet.starDistance = rng() * (planetDistances3.max - planetDistances3.min) + planetDistances3.min;
@@ -83,21 +83,23 @@ function generatePlanet(rng, planetId) {
     return planet;
 }
 
-function generateOreMap(rng, oreType, median, scaleModifier, oreStartValue, oreCount) {
+function generateOreMap(rng, oreType, median, scaleModifier, oreStartValue, oreCount, minimumHeight, heightMap) {
     console.log("\t\t\tGenerating Ores of type: " + oreType);
     let map = generatePerlin2D(planetSize, rng, median, scaleModifier);
     let oreMap = [];
     for (let i = 0; i < map.length; i++) {
         for (let j = 0; j < map[i].length; j++) {
             if (map[i][j] >= oreStartValue) {
-                oreMap.push({
-                    type: oreType,
-                    x: i,
-                    y: j,
-                    oresLeft: oreCount,
-                    depleted: false,
-                    textureFile: "Textures/Terrain/Planets/Ores/" + oreType + ".png"
-                })
+                if (heightMap[i][j] > minimumHeight) {
+                    oreMap.push({
+                        type: oreType,
+                        x: i,
+                        y: j,
+                        oresLeft: oreCount,
+                        depleted: false,
+                        textureFile: "Textures/Terrain/Planets/Ores/" + oreType + ".png"
+                    })
+                }
             }
         }
     }

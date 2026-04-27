@@ -6,9 +6,9 @@ function init() {
     camera = {
         starId: 0,
         planetId: 1,
-        zoom: 20,   // pixel per tile
+        zoom: 4,   // pixel per tile
         x: 0,
-        y: 730
+        y: 0
     }
 
     map = generateMap(1);

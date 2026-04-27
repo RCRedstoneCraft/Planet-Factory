@@ -13,7 +13,7 @@ function renderPlanet() {
     for (let i = 0; i < planet.heightMap.length; i++) {
         for (let j = 0; j < planet.heightMap[i].length; j++) {
             // get pixel color
-            let index = Math.floor(planet.heightMap[i][j] * planet.heightColorMap.length);
+            let index = planet.heightColorMap.length - 1 - Math.floor(planet.heightMap[i][j] * planet.heightColorMap.length);
 
             //console.log(heightColorMapPlanet1[index]);
             ctx.fillStyle = planet.heightColorMap[index];
