@@ -25,6 +25,7 @@ function renderPlanet() {
         }
     }
 }
+
 /*
 reader.onloadend = function(e)
 {
@@ -52,4 +53,4 @@ reader.onloadend = function(e)
     };
 
     img.src = reader.result;
-}/*
+}*/

@@ -57,7 +57,7 @@ function generatePlanet(rng, planetId) {
     let planet = {
         heightMap: heightMap = null,//generateWhiteNoiseRng(planetSize, rng),                                                                   // TODO
         heightColorMap: null,
-        oreMap: null,                                                                                                             // TODO
+        oreMaps: [],                                                                                                                             // TODO
         starDistance: 0,
         windPower: rng() * 2,  // Max 200%
         solarPower: 0,
@@ -72,6 +72,7 @@ function generatePlanet(rng, planetId) {
         planet.starDistance = rng() * (planetDistances2.max - planetDistances2.min) + planetDistances2.min;
         planet.heightColorMap = heightColorMapPlanet1;
         planet.heightMap = generatePerlin2D(planetSize, rng, 0.7, 10)
+        oreMaps.push(generateOreMap(rng, "Iron", 0.5, 5, 0.7, 10000))
     }
     if (planetId === 2) {
         planet.starDistance = rng() * (planetDistances3.max - planetDistances3.min) + planetDistances3.min;
@@ -80,4 +81,25 @@ function generatePlanet(rng, planetId) {
     }
     planet.solarPower = (1 / planet.starDistance) + (rng() * 0.5 - 0.25);
     return planet;
+}
+
+function generateOreMap(rng, oreType, median, scaleModifier, oreStartValue, oreCount) {
+    console.log("\t\t\tGenerating Ores of type: " + oreType);
+    let map = generatePerlin2D(planetSize, rng, median, scaleModifier);
+    let oreMap = [];
+    for (let i = 0; i < map.length; i++) {
+        for (let j = 0; j < map[i].length; j++) {
+            if (map[i][j] >= oreStartValue) {
+                oreMap.push({
+                    type: oreType,
+                    x: i,
+                    y: j,
+                    oresLeft: oreCount,
+                    depleted: false,
+                    textureFile: "Textures/Terrain/Planets/Ores/" + oreType + ".png"
+                })
+            }
+        }
+    }
+    return oreMap;
 }
