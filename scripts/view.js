@@ -44,15 +44,4 @@ function renderPlanet() {
             )};
         }
     }
-
-    let image = new Image();
-    image.src = "Textures/Terrain/Planets/Ores/Iron.png";
-    image.onload = function () {
-    ctx.drawImage(
-        image,
-        0,
-        0,
-        camera.zoom,
-        camera.zoom
-    )}
 }
