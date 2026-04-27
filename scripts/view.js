@@ -7,8 +7,9 @@ function render() {
 function renderPlanet() {
     console.log("rendering Planet");
     let planet = map.starSystems[camera.starId].planets[camera.planetId];
+    console.log(planet);
 
-
+    // draw ground
     for (let i = 0; i < planet.heightMap.length; i++) {
         for (let j = 0; j < planet.heightMap[i].length; j++) {
             // get pixel color
@@ -24,33 +25,34 @@ function renderPlanet() {
             )
         }
     }
+
+    // draw ores
+
+    for (let i = 0; i < planet.oreMaps.length; i++) {
+        for (let j = 0; j < planet.oreMaps[i].length; j++) {
+            let image = new Image();
+            let ore = planet.oreMaps[i][j];
+            image.src = ore.textureFile;
+
+            image.onload = function () {
+            ctx.drawImage(
+                image,
+                ore.x * camera.zoom - camera.x * camera.zoom,
+                ore.y * camera.zoom - camera.y * camera.zoom,
+                camera.zoom,
+                camera.zoom
+            )};
+        }
+    }
+
+    let image = new Image();
+    image.src = "Textures/Terrain/Planets/Ores/Iron.png";
+    image.onload = function () {
+    ctx.drawImage(
+        image,
+        0,
+        0,
+        camera.zoom,
+        camera.zoom
+    )}
 }
-
-/*
-reader.onloadend = function(e)
-{
-    var img = new Image();
-    var ctx = canvas.getContext("2d");
-    var canvasCopy = document.createElement("canvas");
-    var copyContext = canvasCopy.getContext("2d");
-
-    img.onload = function()
-    {
-        var ratio = 1;
-
-        if(img.width > maxWidth)
-            ratio = maxWidth / img.width;
-        else if(img.height > maxHeight)
-            ratio = maxHeight / img.height;
-
-        canvasCopy.width = img.width;
-        canvasCopy.height = img.height;
-        copyContext.drawImage(img, 0, 0);
-
-        canvas.width = img.width * ratio;
-        canvas.height = img.height * ratio;
-        ctx.drawImage(canvasCopy, 0, 0, canvasCopy.width, canvasCopy.height, 0, 0, canvas.width, canvas.height);
-    };
-
-    img.src = reader.result;
-}*/

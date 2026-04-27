@@ -72,7 +72,7 @@ function generatePlanet(rng, planetId) {
         planet.starDistance = rng() * (planetDistances2.max - planetDistances2.min) + planetDistances2.min;
         planet.heightColorMap = heightColorMapPlanet1;
         planet.heightMap = generatePerlin2D(planetSize, rng, 0.7, 10)
-        oreMaps.push(generateOreMap(rng, "Iron", 0.5, 5, 0.7, 10000))
+        planet.oreMaps.push(generateOreMap(rng, "Iron", 0.5, 10, 0.7, 5000))
     }
     if (planetId === 2) {
         planet.starDistance = rng() * (planetDistances3.max - planetDistances3.min) + planetDistances3.min;
