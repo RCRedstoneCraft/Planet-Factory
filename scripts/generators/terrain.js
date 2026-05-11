@@ -1,6 +1,6 @@
 console.log("loaded generators/terrain.js");
 
-const starCount = 16;
+const starCount = 2;
 const planetCount = 3;
 const mapSize = 100;        // ly (light years)
 const planetSize = 1000;    // gs (grid Spaces)
@@ -57,7 +57,7 @@ function generatePlanet(rng, planetId) {
     let planet = {
         heightMap: heightMap = null,//generateWhiteNoiseRng(planetSize, rng),                                                                   // TODO
         heightColorMap: null,
-        oreMaps: [],                                                                                                                             // TODO
+        oreMaps: [],                                                                                                                          // TODO
         starDistance: 0,
         windPower: rng() * 2,  // Max 200%
         solarPower: 0,
@@ -79,6 +79,7 @@ function generatePlanet(rng, planetId) {
         planet.heightColorMap = heightColorMapPlanet2;
         planet.heightMap = generatePerlin2D(planetSize, rng, 0.5, 7)
     }
+
     planet.solarPower = (1 / planet.starDistance) + (rng() * 0.5 - 0.25);
     return planet;
 }
