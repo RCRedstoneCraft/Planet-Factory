@@ -1,5 +1,6 @@
 let map = null;
 let camera = null;
+let currentplanet = 0;
 
 let canvas = document.getElementById("2dcanvas")
 let ctx = canvas.getContext("2d");
